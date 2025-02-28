@@ -188,5 +188,3 @@ if __name__ == "__main__":
     for link in updated_links:
         print(f"Node {link.j} - Position (p): {link.p}, Rotation (R):")
         print(link.R)
-
-        修改
