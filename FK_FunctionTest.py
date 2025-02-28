@@ -44,12 +44,12 @@ def create_simple_model():
     )
     links.append(base)
     
-    # 2. （節點 1），相對於基座偏移 [0, -15, 0]，沿 X+ 軸旋轉
+    # 2. 創建馬達（節點 1），相對於基座偏移 [0, -15, 0]，沿 X+ 軸旋轉
     motor = Link(
         j=1,
         mother=0,  # 母節點為基座
         child=None,
-        p=links[0].p + links[0].R @ links[0].b,  # 馬達靠近身體端的位置（初始與基座相同，後由 b 決定末端）
+        p=links[0].p + links[0].R @ links[0].b,  # 馬達靠近身體端的位置（基於基座的末端）
         R=np.eye(3),  # 初始旋轉為單位矩陣
         m=0.0,
         a=np.array([1, 0, 0]),  # 沿 X+ 軸旋轉
@@ -80,19 +80,32 @@ def forward_kinematics(links: list, joint_angles: list):
     def update_node(node: Link, parent: Link = None):
         nonlocal angle_idx
         
+        print(f"Entering update_node for Node {node.j} - Parent: {parent.j if parent else 'None'}, Child: {node.child}")
+        
         if node.mother is not None:
             # 查找母節點
             parent = next(l for l in updated_links if l.j == node.mother)
-
+            print(f"Processing Node {node.j} - Mother: {node.mother}, Axis (a): {node.a}, Current Angle Index: {angle_idx}")
+            
             # 嘗試應用角度（僅對具有非零 a 的節點）
             if angle_idx < len(joint_angles) and np.any(node.a != 0):
                 joint_angle = joint_angles[angle_idx]
                 node.q = joint_angle
                 
+                print(f"Attempting to apply angle {np.degrees(joint_angle)} degrees to Node {node.j} with axis (a): {node.a}")
+                
+                # 打印父節點的姿態以調試
+                print(f"Parent Node {parent.j} Position (p): {parent.p}, Rotation (R):")
+                print(parent.R)
+                
                 # 計算 a 在世界座標系中的方向
                 a_world = parent.R @ node.a
-                # 讓a_world長度為1
+                if np.linalg.norm(a_world) == 0:
+                    print(f"Warning: Zero axis for Node {node.j}, forcing default axis [1, 0, 0]")
+                    a_world = np.array([1, 0, 0])  # 臨時使用 X 軸作為預設
                 a_world = a_world / np.linalg.norm(a_world) if np.linalg.norm(a_world) > 0 else np.array([1, 0, 0])
+                
+                print(f"Axis in world coordinates (a_world): {a_world}")
                 
                 # 計算 K 矩陣（用於羅德里格斯旋轉公式）
                 K = np.array([
@@ -100,8 +113,14 @@ def forward_kinematics(links: list, joint_angles: list):
                     [a_world[2], 0, -a_world[0]],
                     [-a_world[1], a_world[0], 0]
                 ])
+                print(f"K matrix for Node {node.j}:")
+                print(K)
+                
                 # 計算並打印 R_joint（旋轉矩陣）
-                R_joint = np.eye(3) + np.sin(joint_angle) * K + (1 - np.cos(joint_angle)) * (K @ K)                
+                R_joint = np.eye(3) + np.sin(joint_angle) * K + (1 - np.cos(joint_angle)) * (K @ K)
+                print(f"Rotation matrix for Node {node.j} (R_joint):")
+                print(R_joint)
+                
                 # 更新節點的姿態（靠近身體端的世界姿態）
                 node.R = R_joint @ parent.R
             
@@ -109,18 +128,39 @@ def forward_kinematics(links: list, joint_angles: list):
                 # 如果無角度或 a 為零，繼承父節點的姿態
                 node.R = parent.R.copy()
             
-            # 更新 p 為母節點 p 加上 b（已應用旋轉）
-            node.p = parent.p + (parent.R @ parent.b)  # 使用當前節點的 R 應用到 b
+            # 打印更新前的位置和姿態
+            print(f"Node {node.j} before position update - Position (p): {node.p}, Rotation (R):")
+            print(node.R)
+            
+            # 確認 node.b 和 parent.b 的初始值
+            print(f"Node {node.j} initial offset (b): {node.b}")
+            
+            # 根據新定義，p 為靠近身體端的位置，b 為末端在旋轉過後的相對座標向量
+            # 使用子節點的 R 應用到 b，計算靠近身體端的位置
+            b_world = node.R @ node.b  # 修正：使用 node.R @ node.b，確保子節點的旋轉應用到 b
+            print(f"b_world for Node {node.j} (using node.R @ node.b): {b_world}")
+            
+            # 更新 p 為母節點 p 加上旋轉後的 b
+            node.p = parent.p + b_world
+            
+            # 打印更新後的位置
+            print(f"Node {node.j} after position update - Position (p): {node.p}, Rotation (R):")
+            print(node.R)
             
             # 每次處理可動關節後增加 angle_idx
             if angle_idx < len(joint_angles) and np.any(node.a != 0):
                 angle_idx += 1
+                print(f"Incremented angle_idx to {angle_idx}")
         
         # 遞歸處理子節點
         if node.child is not None:
+            print(f"Moving to child Node {node.child}")
             child = next(l for l in updated_links if l.j == node.child)
             update_node(child, node)
 
+    # 調用 update_node 從根節點開始
+    update_node(root)
+    
     return updated_links
 
 def PlotLinkChain(links: list):
