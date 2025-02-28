@@ -39,7 +39,7 @@ def create_simple_model():
         R=np.eye(3), 
         m=10.0,
         a=np.zeros(3), 
-        b=np.array([0, 0, -15]),  
+        b=np.array([0, 0, -15]),  # 基座末端偏移（向下 15 單位）
         child=1  #
     )
     links.append(base)
