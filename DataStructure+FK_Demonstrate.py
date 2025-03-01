@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.widgets import Slider
 
 @dataclass
 class Link:
@@ -220,74 +221,145 @@ def forward_kinematics(links: list, joint_angles: list):
     
     return updated_links
 
-def PlotLinkChain(links: list):
-    """ 在 3D 空間中顯示連桿鏈 """
-    fig = plt.figure()
+def PlotLinkChain(links: list, joint_angles=None):
+    """ 在 3D 空間中顯示連桿鏈，並添加互動式拉桿控制自由度 """
+    fig = plt.figure(figsize=(12, 10))  # 保持較大的視窗大小以顯示所有拉桿
     ax = fig.add_subplot(111, projection='3d')
 
-    for link in links:
+    # 初始化連桿數據
+    if joint_angles is None:
+        joint_angles = [0.0] * 6  # 初始角度全為 0 度（6 個自由度：3 個髖部 + 1 個膝蓋 + 2 個腳踝）
+    
+    # 更新連桿數據
+    updated_links = forward_kinematics(links, [np.radians(angle) for angle in joint_angles])
+    
+    # 繪製連桿和關節
+    lines = []  # 儲存連桿線段以便後續更新
+    scatters = []  # 儲存節點點以便後續更新
+    quivers = []  # 儲存關節軸向量以便後續更新
+
+    # 收集可動關節的節點 ID 和初始 quiver 物件
+    movable_joints = []  # 儲存有非零 a 向量的節點 ID
+    for link in updated_links:
+        if np.any(link.a != 0):
+            movable_joints.append(link.j)
+
+    for link in updated_links:
         # 畫節點位置（靠近身體端的位置 p）
-        ax.scatter(link.p[0], link.p[1], link.p[2], 
-                  c='r', marker='o', label=f"Node" if link.j == 0 else "")
+        scatter = ax.scatter(link.p[0], link.p[1], link.p[2], 
+                           c='r', marker='o', label=f"Node {link.j}" if link.j == 0 else "")
+        scatters.append(scatter)
 
-        # 畫出連桿
-        # 計算連桿末端位置（當前節點的 p + R @ b）
+        # 畫出連桿（從 p 到 p + R @ b）
         end_point = link.p + (link.R @ link.b)
-
-        # 畫連桿線段
-        ax.plot([link.p[0], end_point[0]], 
-                [link.p[1], end_point[1]], 
-                [link.p[2], end_point[2]], 
-                'b-', label='Link' if link.j == 1 else "")
+        line, = ax.plot([link.p[0], end_point[0]], 
+                        [link.p[1], end_point[1]], 
+                        [link.p[2], end_point[2]], 
+                        'b-', label='Link' if link.j == 1 else "")
+        lines.append(line)
 
         # 畫關節軸向量 a，從當前節點位置開始（僅對具有非零 a 向量的可動關節）
         if np.any(link.a != 0):
-            # 使用當前節點的位置作為起點，並計算 a 在世界座標系中的方向
             a_world = link.R @ link.a * 10  # 縮放後的關節軸向量
-            ax.quiver(link.p[0], link.p[1], link.p[2],  # 從當前節點位置開始
-                      a_world[0], a_world[1], a_world[2],
-                      color='g', label='Joint Axis' if link.j == 1 else "")
+            # 檢查 a_world 是否有效
+            if not np.all(np.isfinite(a_world)):
+                print(f"Warning: Invalid a_world for Node {link.j}, forcing default [10, 0, 0]")
+                a_world = np.array([10, 0, 0])  # 預設值
+            quiver = ax.quiver(link.p[0], link.p[1], link.p[2],  # 從當前節點位置開始
+                              a_world[0], a_world[1], a_world[2],
+                              color='g', label='Joint Axis' if link.j == 2 else "")  # 確保 color 為關鍵字參數
+            quivers.append(quiver)
 
     # 設定座標軸標籤
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
 
-    # 設定視圖範圍（擴展以顯示可能的旋轉）
+    # 設定視圖範圍
     ax.set_xlim([-50, 50])
     ax.set_ylim([-50, 50])
-    ax.set_zlim([-50, 50])
+    ax.set_zlim([0, 150])
 
     # 顯示標籤
     handles, labels = ax.get_legend_handles_labels()
     by_label = dict(zip(labels, handles))
     ax.legend(by_label.values(), by_label.keys())
+
+    # 創建拉桿控制自由度
+    axcolor = 'lightgoldenrodyellow'
+    sliders = []
+
+    # 定義可動關節的節點 ID（僅包含有非零 a 向量的節點）
+    joint_ids = movable_joints  # 使用動態收集的可動關節 ID
+    initial_angles = joint_angles[:len(joint_ids)]  # 確保初始角度與可動關節數量匹配
+
+    # 創建拉桿（在圖表下方，確保所有拉桿顯示）
+    slider_axs = [plt.axes([0.1, 0.01 + i * 0.05, 0.8, 0.03], facecolor=axcolor) for i in range(len(joint_ids))]
+    for i, (joint_id, ax) in enumerate(zip(joint_ids, slider_axs)):
+        label = f"Joint {joint_id} (degrees)"
+        slider = Slider(ax, label, -180, 180, valinit=np.degrees(initial_angles[i]))
+        sliders.append((joint_id, slider))
+
+    def update(val):
+        """ 更新連桿姿態和顯示 """
+        new_angles = [np.radians(slider.val) for _, slider in sliders]
+        # 確保 new_angles 長度與 forward_kinematics 預期的自由度數量（6 個）匹配
+        while len(new_angles) < 6:
+            new_angles.append(0.0)  # 補齊缺少的角度為 0 度
+        updated_links = forward_kinematics(links, new_angles)
+
+        # 更新連桿和關節顯示
+        for i, link in enumerate(updated_links):
+            # 更新節點位置
+            scatters[i].remove()  # 移除舊的散點
+            scatters[i] = ax.scatter(link.p[0], link.p[1], link.p[2], c='r', marker='o')
+
+            # 更新連桿線段
+            end_point = link.p + (link.R @ link.b)
+            lines[i].set_data([link.p[0], end_point[0]], [link.p[1], end_point[1]])
+            lines[i].set_3d_properties([link.p[2], end_point[2]])
+
+            # 更新關節軸向量（僅對可動關節）
+            if np.any(link.a != 0) and link.j in joint_ids:
+                a_world = link.R @ link.a * 10
+                # 檢查 a_world 是否有效
+                if not np.all(np.isfinite(a_world)):
+                    print(f"Warning: Invalid a_world for Node {link.j} in update, forcing default [10, 0, 0]")
+                    a_world = np.array([10, 0, 0])  # 預設值
+                idx = joint_ids.index(link.j)
+                if idx < len(quivers):  # 確保索引有效
+                    try:
+                        quivers[idx].remove()  # 移除舊的向量
+                    except ValueError:
+                        print(f"Warning: Quiver for Node {link.j} not found in quivers list, recreating...")
+                    quivers[idx] = ax.quiver(link.p[0], link.p[1], link.p[2],  # 確保 color 為關鍵字參數
+                                           a_world[0], a_world[1], a_world[2],
+                                           color='g')  # 明確指定 color 為關鍵字參數
+                else:
+                    print(f"Warning: Quiver index {idx} out of range for Node {link.j}")
+
+        fig.canvas.draw_idle()
+
+    # 為每個拉桿添加更新函數
+    for _, slider in sliders:
+        slider.on_changed(update)
+
     plt.show()
 
 # 測試範例
 if __name__ == "__main__":
-    # 創建簡單模型（基座 + 單一馬達）
-    simple_links = create_simple_model()
+    # 創建模型（基座 + 髖部三自由度 + 膝蓋 + 腳踝兩自由度）
+    leg_links = create_simple_model()
     
-    # 可視化初始結構
-    PlotLinkChain(simple_links)
-    
-    # 定義關節角度（弧度），對應單一可動關節（馬達）
-    joint_angles = [
-        np.radians(0),  # 髖部自由度 1（X+，節點 2）
-        np.radians(0),   # 髖部自由度 2（Y+，節點 3，設為 0 度）
-        np.radians(0),   # 髖部自由度 3（Z+，節點 4，設為 0 度）
-        np.radians(0),  # 膝蓋關節（Y+，節點 5）
-        np.radians(0),  # 腳踝自由度 1（X+，節點 6）
-        np.radians(0)   # 腳踝自由度 2（Y+，節點 7）
+    # 定義初始關節角度（弧度），對應每個可動關節（3 個髖部自由度 + 1 個膝蓋 + 2 個腳踝自由度）
+    initial_joint_angles = [
+        np.radians(0),   # 髖部自由度 1（X+，節點 2）
+        np.radians(0),   # 髖部自由度 2（Y+，節點 3）
+        np.radians(0),   # 髖部自由度 3（Z+，節點 4）
+        np.radians(0),   # 膝蓋關節（Y+，節點 5）
+        np.radians(0),   # 腳踝自由度 1（X+，節點 6）
+        np.radians(0)    # 腳踝自由度 2（Y+，節點 7）
     ]
-    # 應用正運動學
-    updated_links = forward_kinematics(simple_links, joint_angles)
     
-    # 可視化更新後的結構
-    PlotLinkChain(updated_links)
-    
-    # 打印更新後的節點位置以供檢查
-    for link in updated_links:
-        print(f"Node {link.j} - Position (p): {link.p}, Rotation (R):")
-        print(link.R)
+    # 可視化初始結構並添加互動拉桿
+    PlotLinkChain(leg_links, initial_joint_angles)
