@@ -5,8 +5,9 @@
       <ambient>0.4 0.4 0.4</ambient>
       <grid>false</grid>
     </scene>
-
-    <!-- Light setup for illumination -->
+    <!--              -->
+    <!-- Illumination -->
+    <!--              -->
     <light type="directional" name="sun">
       <cast_shadows>false</cast_shadows>
       <pose>5 5 5 0 0 0</pose>
@@ -20,20 +21,15 @@
       </attenuation>
       <direction>-1 -1 -1</direction>
     </light>
-
-    <model name="ground_plane">
-      <pose>0 0 0 0 0 0</pose> <!-- 水平放置在地面 -->
+ 
+    <!--        -->
+    <!-- Models -->
+    <!--        -->
+    <model name="background_plane">
+      <pose>-0.1 0 0 0 1.5708 0</pose>
       <static>true</static>
-      <link name="ground_plane_link">
-        <collision name="ground_plane_collision">
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>5 5</size>
-            </plane>
-          </geometry>
-        </collision>
-        <visual name="ground_plane_visual">
+      <link name="background_plane_link">
+        <visual name="background_plane_visual">
           <geometry>
             <plane>
               <normal>0 0 1</normal>
@@ -47,13 +43,16 @@
         </visual>
       </link>
     </model>
-
+ 
     <!-- RR robot (Red) - Position control -->
     <model name="RR_position_control">
-      <!-- Set initial pose to be above the ground (suspended) -->
-      <pose>0 0 1.0 0 -3.14159 0</pose> <!-- z=1.0 makes it hover above the ground -->
-
-      <!-- Links Definition -->
+      <pose>0 0 0 0 -3.14159 0</pose>
+      <!-- Fix To World -->
+      <joint name="RR_position_control_world" type="fixed">
+        <parent>world</parent>
+        <child>RR_position_control_link0</child>
+      </joint>
+      <!-- Links -->
       <link name="RR_position_control_link0">
         <collision name="RR_position_control_link0_collision_0">
           <geometry>
@@ -75,7 +74,7 @@
           </material>
         </visual>
       </link>
-
+      
       <link name="RR_position_control_link1">
         <pose relative_to="RR_position_control_joint1">0 0 0.1 0 0 0</pose>
         <collision name="RR_position_control_link1_collision_0">
@@ -84,6 +83,13 @@
               <radius>0.01</radius>
               <length>0.2</length>
             </cylinder>
+          </geometry>
+        </collision>
+        <collision name="RR_position_control_link1_collision_1">
+          <geometry>
+            <sphere>
+              <radius>0.0125</radius>
+            </sphere>
           </geometry>
         </collision>
         <visual name="RR_position_control_link1_visual_0">
@@ -99,8 +105,28 @@
             <specular>0.8 0 0 1</specular>
           </material>
         </visual>
+        <visual name="RR_position_control_link1_visual_1">
+          <pose relative_to="RR_position_control_joint1">0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.0125</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.0003358</ixx>
+            <iyy>0.0003358</iyy>
+            <izz>0.000005</izz>
+          </inertia>
+        </inertial>
       </link>
-
       <link name="RR_position_control_link2">
         <pose relative_to="RR_position_control_joint2">0 0 0.1 0 0 0</pose>
         <collision name="RR_position_control_link2_collision">
@@ -124,8 +150,15 @@
             <specular>0.8 0 0 1</specular>
           </material>
         </visual>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.0003358</ixx>
+            <iyy>0.0003358</iyy>
+            <izz>0.000005</izz>
+          </inertia>
+        </inertial>
       </link>
-
       <!-- Joints -->
       <joint name="RR_position_control_joint1" type="revolute">
         <pose relative_to="RR_position_control_link0">0 0 0 0 0 0</pose>
@@ -138,7 +171,6 @@
           </dynamics>
         </axis>
       </joint>
-      
       <joint name="RR_position_control_joint2" type="revolute">
         <pose relative_to="RR_position_control_link1">0 0 0.1 0 0 0</pose>
         <parent>RR_position_control_link1</parent>
@@ -150,7 +182,6 @@
           </dynamics>
         </axis>
       </joint>
-
       <!-- Controller -->
       <plugin
         filename="gz-sim-joint-trajectory-controller-system"
@@ -174,8 +205,9 @@
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
         <position_cmd_max>10</position_cmd_max>
-      </plugin>
+      </plugin>      
 
+      
     </model>
   </world>
 </sdf>
