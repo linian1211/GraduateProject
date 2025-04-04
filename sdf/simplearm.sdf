@@ -26,9 +26,17 @@
     <!-- Models -->
     <!--        -->
     <model name="background_plane">
-      <pose>-0.1 0 0 0 1.5708 0</pose>
+      <pose>-0.1 0 0 0 0 0</pose>
       <static>true</static>
       <link name="background_plane_link">
+        <collision name="background_plane_collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>5 5</size>
+            </plane>
+          </geometry>
+        </collision>
         <visual name="background_plane_visual">
           <geometry>
             <plane>
@@ -46,12 +54,8 @@
  
     <!-- RR robot (Red) - Position control -->
     <model name="RR_position_control">
-      <pose>0 0 0 0 -3.14159 0</pose>
-      <!-- Fix To World -->
-      <joint name="RR_position_control_world" type="fixed">
-        <parent>world</parent>
-        <child>RR_position_control_link0</child>
-      </joint>
+      <pose>0 0 1 0 -3.14159 0</pose>
+
       <!-- Links -->
       <link name="RR_position_control_link0">
         <collision name="RR_position_control_link0_collision_0">
@@ -211,3 +215,26 @@
     </model>
   </world>
 </sdf>
+
+<!--  to run this example, use the following command:
+
+gz topic -t "/model/RR_position_control/joint_trajectory" -m gz.msgs.JointTrajectory -p '
+joint_names: "RR_position_control_joint1"
+joint_names: "RR_position_control_joint2"
+points {
+  positions: -0.7854
+  positions: 1.5708
+  time_from_start { sec: 0 nsec: 250000000 }
+}
+points {
+  positions: -1.5708
+  positions: 0
+  time_from_start { sec: 0 nsec: 500000000 }
+}
+points {
+  positions: -1.5708
+  positions: -1.5708
+  time_from_start { sec: 1 nsec: 0 }
+}'
+
+ -->
