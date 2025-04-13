@@ -74,6 +74,13 @@
         </visual>
       </link>
 
+      <!-- 將基座固定到世界 
+      <joint name="hip_base_fixed" type="fixed">
+        <parent>world</parent>
+        <child>hip_base</child>
+      </joint>
+      -->
+
       <!-- 右腿（原始腿） -->
       <link name="right_link0">
         <pose relative_to="right_joint0">0 -0.05 0 1.5708 0 0</pose>
@@ -474,7 +481,7 @@
         <axis>
           <xyz>0 0 1</xyz>
           <dynamics>
-            <damping>0.25</damping>
+            <damping>5.0</damping> <!-- 更新阻尼值 -->
           </dynamics>
         </axis>
       </joint>
@@ -486,7 +493,7 @@
         <axis>
           <xyz>1 0 0</xyz>
           <dynamics>
-            <damping>0.25</damping>
+            <damping>5.0</damping> <!-- 更新阻尼值 -->
           </dynamics>
         </axis>
       </joint>
@@ -498,7 +505,7 @@
         <axis>
           <xyz>0 1 0</xyz>
           <dynamics>
-            <damping>0.25</damping>
+            <damping>5.0</damping> <!-- 更新阻尼值 -->
           </dynamics>
         </axis>
       </joint>
@@ -559,7 +566,7 @@
         <axis>
           <xyz>0 0 1</xyz>
           <dynamics>
-            <damping>0.25</damping>
+            <damping>5.0</damping> <!-- 更新阻尼值 -->
           </dynamics>
         </axis>
       </joint>
@@ -571,7 +578,7 @@
         <axis>
           <xyz>1 0 0</xyz>
           <dynamics>
-            <damping>0.25</damping>
+            <damping>5.0</damping> <!-- 更新阻尼值 -->
           </dynamics>
         </axis>
       </joint>
@@ -583,7 +590,7 @@
         <axis>
           <xyz>0 1 0</xyz>
           <dynamics>
-            <damping>0.25</damping>
+            <damping>5.0</damping> <!-- 更新阻尼值 -->
           </dynamics>
         </axis>
       </joint>
