@@ -249,14 +249,14 @@
         <collision name="right_link4_collision">
           <geometry>
             <box>
-              <size>0.1 0.2 0.01</size>
+              <size>0.18 0.1 0.01</size>
             </box>
           </geometry>
         </collision>
         <visual name="right_link4_visual">
           <geometry>
             <box>
-              <size>0.2 0.1 0.01</size>
+              <size>0.18 0.1 0.01</size>
             </box>
           </geometry>
           <material>
@@ -269,12 +269,12 @@
 
       <!-- 左腿（對稱複製） -->
       <link name="left_link0">
-        <pose relative_to="left_joint0">0 0.075 0 1.5708 0 0</pose> <!-- Y 軸對稱 -->
+        <pose relative_to="left_joint0">0 0.05 0 1.5708 0 0</pose> <!-- Y 軸對稱 -->
         <collision name="left_link0_collision_0">
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.15</length>
+              <length>0.1</length>
             </cylinder>
           </geometry>
         </collision>
@@ -282,7 +282,7 @@
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.15</length>
+              <length>0.1</length>
             </cylinder>
           </geometry>
           <material>
@@ -340,12 +340,12 @@
       </link>
 
       <link name="left_link1">
-        <pose relative_to="left_joint3">0 0 0.2 0 0 0</pose>
+        <pose relative_to="left_joint3">0 0 -0.15 0 0 0</pose>
         <collision name="left_link1_collision">
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.4</length>
+              <length>0.3</length>
             </cylinder>
           </geometry>
         </collision>
@@ -353,7 +353,7 @@
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.4</length>
+              <length>0.3</length>
             </cylinder>
           </geometry>
           <material>
@@ -365,12 +365,12 @@
       </link>
 
       <link name="left_link2">
-        <pose relative_to="left_joint4">0 0 0.125 0 0 0</pose>
+        <pose relative_to="left_joint4">0 0 -0.15 0 0 0</pose>
         <collision name="left_link2_collision">
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.25</length>
+              <length>0.3</length>
             </cylinder>
           </geometry>
         </collision>
@@ -378,7 +378,7 @@
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.25</length>
+              <length>0.3</length>
             </cylinder>
           </geometry>
           <material>
@@ -413,12 +413,12 @@
       </link>
 
       <link name="left_link3">
-        <pose relative_to="left_joint6">0 0 0.075 0 0 0</pose>
+        <pose relative_to="left_joint6">0 0 -0.025 0 0 0</pose>
         <collision name="left_link3_collision">
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.15</length>
+              <length>0.05</length>
             </cylinder>
           </geometry>
         </collision>
@@ -426,7 +426,7 @@
           <geometry>
             <cylinder>
               <radius>0.01</radius>
-              <length>0.15</length>
+              <length>0.05</length>
             </cylinder>
           </geometry>
           <material>
@@ -438,18 +438,18 @@
       </link>
 
       <link name="left_link4">
-        <pose relative_to="left_link3">0 0 0.075 0 0 0</pose>
+        <pose relative_to="left_link3">0.03 0 -0.025 0 0 0</pose>
         <collision name="left_link4_collision">
           <geometry>
             <box>
-              <size>0.1 0.2 0.02</size>
+              <size>0.18 0.1 0.01</size>
             </box>
           </geometry>
         </collision>
         <visual name="left_link4_visual">
           <geometry>
             <box>
-              <size>0.2 0.1 0.02</size>
+              <size>0.18 0.1 0.01</size>
             </box>
           </geometry>
           <material>
@@ -553,7 +553,7 @@
       </joint>
 
       <joint name="left_joint1" type="revolute">
-        <pose relative_to="left_link0">0 0 -0.075 1.5708 0 0</pose>
+        <pose relative_to="left_link0">0 0 -0.05 -1.5708 0 0</pose>
         <parent>left_link0</parent>
         <child>left_hip1</child>
         <axis>
@@ -565,7 +565,7 @@
       </joint>
 
       <joint name="left_joint2" type="revolute">
-        <pose relative_to="left_joint1">0 0 0 0 0 0</pose>
+        <pose relative_to="left_hip1">0 0 0 0 0 0</pose>
         <parent>left_hip1</parent>
         <child>left_hip2</child>
         <axis>
@@ -577,7 +577,7 @@
       </joint>
 
       <joint name="left_joint3" type="revolute">
-        <pose relative_to="left_joint2">0 0 0 0 0 0</pose>
+        <pose relative_to="left_hip2">0 0 0 0 0 0</pose>
         <parent>left_hip2</parent>
         <child>left_link1</child>
         <axis>
@@ -589,7 +589,7 @@
       </joint>
 
       <joint name="left_joint4" type="revolute">
-        <pose relative_to="left_link1">0 0 0.2 0 0 0</pose>
+        <pose relative_to="left_link1">0 0 -0.15 0 0 0</pose>
         <parent>left_link1</parent>
         <child>left_link2</child>
         <axis>
@@ -601,7 +601,7 @@
       </joint>
 
       <joint name="left_joint5" type="revolute">
-        <pose relative_to="left_link2">0 0 0.125 0 0 0</pose>
+        <pose relative_to="left_link2">0 0 -0.15 0 0 0</pose>
         <parent>left_link2</parent>
         <child>left_ankle</child>
         <axis>
@@ -636,9 +636,9 @@
         <!-- 右腿控制 -->
         <joint_name>right_joint1</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -646,9 +646,9 @@
 
         <joint_name>right_joint2</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -656,9 +656,9 @@
 
         <joint_name>right_joint3</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -666,9 +666,9 @@
 
         <joint_name>right_joint4</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -676,9 +676,9 @@
 
         <joint_name>right_joint5</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -686,9 +686,9 @@
 
         <joint_name>right_joint6</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -697,9 +697,9 @@
         <!-- 左腿控制 -->
         <joint_name>left_joint1</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -707,9 +707,9 @@
 
         <joint_name>left_joint2</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -717,9 +717,9 @@
 
         <joint_name>left_joint3</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -727,9 +727,9 @@
 
         <joint_name>left_joint4</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -737,9 +737,9 @@
 
         <joint_name>left_joint5</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
@@ -747,9 +747,9 @@
 
         <joint_name>left_joint6</joint_name>
         <initial_position>0</initial_position>
-        <position_p_gain>10</position_p_gain>
-        <position_i_gain>0.2</position_i_gain>
-        <position_d_gain>0.5</position_d_gain>
+        <position_p_gain>50</position_p_gain> <!-- 增強 P 增益 -->
+        <position_i_gain>0.5</position_i_gain> <!-- 增強 I 增益 -->
+        <position_d_gain>5</position_d_gain>  <!-- 增強 D 增益 -->
         <position_i_min>-1</position_i_min>
         <position_i_max>1</position_i_max>
         <position_cmd_min>-10</position_cmd_min>
