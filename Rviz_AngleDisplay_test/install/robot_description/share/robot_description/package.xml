@@ -1,18 +1,1 @@
-<?xml version="1.0"?>
-<package format="3">
-  <name>robot_description</name>
-  <version>0.0.0</version>
-  <description>Robot description package for URDF and SDF</description>
-  <maintainer email="your_email@example.com">Your Name</maintainer>
-  <license>Apache-2.0</license>
-
-  <depend>rclcpp</depend>
-  <depend>robot_state_publisher</depend>
-  <depend>joint_state_publisher_gui</depend>
-  <depend>rviz2</depend>
-  <depend>gazebo_ros</depend>
-
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
-</package>
+/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description/package.xml
