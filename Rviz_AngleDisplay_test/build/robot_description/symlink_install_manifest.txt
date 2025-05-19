@@ -3,6 +3,7 @@
 /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/launch/display.launch.py
 /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/config/bridge_config.yaml
 /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/package.xml
+/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/lib/robot_description/joint_angle_plotter.py
 /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/ament_index/resource_index/package_run_dependencies/robot_description
 /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/ament_index/resource_index/parent_prefix_path/robot_description
 /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/environment/ament_prefix_path.sh

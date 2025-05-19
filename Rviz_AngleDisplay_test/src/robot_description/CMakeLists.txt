@@ -20,5 +20,11 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+# 安裝Python腳本
+install(PROGRAMS
+  scripts/joint_angle_plotter.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
 

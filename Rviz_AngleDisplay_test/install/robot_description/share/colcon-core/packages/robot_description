@@ -1,1 +1,1 @@
-gazebo_ros:joint_state_publisher_gui:rclcpp:robot_state_publisher:rviz2
+ament_python:gazebo_ros:joint_state_publisher_gui:python3-matplotlib:rclcpp:robot_state_publisher:rosgraph_msgs:rviz2:sensor_msgs

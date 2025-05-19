@@ -4,6 +4,8 @@ from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch_ros.actions import Node
 import os
 
 def generate_launch_description():
@@ -20,6 +22,15 @@ def generate_launch_description():
             default_value='true',
             description='Whether to launch Gazebo'
         ),
+
+        Node(
+            package='robot_description',
+            executable='joint_angle_plotter.py',
+            name='joint_angle_plotter',
+            output='screen',
+            prefix=['python3 '],  # 明確指定 python3
+        ),
+
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',

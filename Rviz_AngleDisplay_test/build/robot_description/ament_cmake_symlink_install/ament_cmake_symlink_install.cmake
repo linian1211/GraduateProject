@@ -316,6 +316,9 @@ ament_cmake_symlink_install_directory("/home/tingyi/git/GraduateProject/Rviz_Ang
 # install(FILES "package.xml" "DESTINATION" "share/robot_description")
 ament_cmake_symlink_install_files("/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description" FILES "package.xml" "DESTINATION" "share/robot_description")
 
+# install(PROGRAMS "scripts/joint_angle_plotter.py" "DESTINATION" "lib/robot_description")
+ament_cmake_symlink_install_programs("/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description" PROGRAMS "scripts/joint_angle_plotter.py" "DESTINATION" "lib/robot_description")
+
 # install(FILES "/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_description" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description" FILES "/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_description" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 
