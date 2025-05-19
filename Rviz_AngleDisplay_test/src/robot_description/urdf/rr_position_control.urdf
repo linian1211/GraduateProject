@@ -86,7 +86,7 @@
   <joint name="RR_position_control_joint2" type="revolute">
     <parent link="RR_position_control_link1"/>
     <child link="RR_position_control_link2"/>
-    <origin xyz="0 0 0.1" rpy="0 0 0"/> <!-- 匹配SDF的z=0.1 -->
+    <origin xyz="0 0 0.2" rpy="0 0 0"/> <!-- 匹配SDF的z=0.1 -->
     <axis xyz="1 0 0"/>
     <limit lower="-3.14" upper="3.14" effort="10" velocity="10"/>
   </joint>

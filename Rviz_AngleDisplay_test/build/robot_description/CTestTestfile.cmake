@@ -1,5 +1,5 @@
 # CMake generated Testfile for 
-# Source directory: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test
+# Source directory: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description
 # Build directory: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description
 # 
 # This file includes the relevant testing commands required for 

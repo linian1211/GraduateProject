@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test
+CMAKE_SOURCE_DIR = /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description
