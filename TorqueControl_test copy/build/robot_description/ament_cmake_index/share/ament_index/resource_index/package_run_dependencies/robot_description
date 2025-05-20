@@ -1,0 +1,1 @@
+rclcpp;robot_state_publisher;joint_state_publisher_gui;rviz2;gazebo_ros;sensor_msgs;rosgraph_msgs;ament_python;python3-matplotlib
