@@ -25,7 +25,7 @@
 -- Using RMW implementation 'rmw_fastrtps_cpp' as default
 -- Found robot_state_publisher: 3.3.3 (/opt/ros/jazzy/share/robot_state_publisher/cmake)
 -- Found rviz2: 14.1.10 (/opt/ros/jazzy/share/rviz2/cmake)
--- Configuring done (2.0s)
+-- Configuring done (2.3s)
 -- Generating done (0.0s)
 -- Build files have been written to: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description
 -- Install configuration: ""

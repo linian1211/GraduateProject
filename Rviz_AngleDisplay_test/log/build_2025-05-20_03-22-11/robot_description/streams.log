@@ -1,0 +1,59 @@
+[0.017s] Invoking command in '/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description
+[0.273s] -- The C compiler identification is GNU 13.3.0
+[0.451s] -- The CXX compiler identification is GNU 13.3.0
+[0.480s] -- Detecting C compiler ABI info
+[0.607s] -- Detecting C compiler ABI info - done
+[0.622s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.623s] -- Detecting C compile features
+[0.623s] -- Detecting C compile features - done
+[0.637s] -- Detecting CXX compiler ABI info
+[0.764s] -- Detecting CXX compiler ABI info - done
+[0.774s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.774s] -- Detecting CXX compile features
+[0.775s] -- Detecting CXX compile features - done
+[0.788s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.963s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.045s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.129s] -- Found rclcpp: 28.1.9 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.217s] -- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.244s] -- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.278s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.316s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.457s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.464s] -- Found rmw_fastrtps_cpp: 8.4.2 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[1.600s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[1.625s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[1.650s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.781s] -- Found robot_state_publisher: 3.3.3 (/opt/ros/jazzy/share/robot_state_publisher/cmake)
+[2.195s] -- Found rviz2: 14.1.10 (/opt/ros/jazzy/share/rviz2/cmake)
+[2.295s] -- Configuring done (2.3s)
+[2.301s] -- Generating done (0.0s)
+[2.304s] -- Build files have been written to: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description
+[2.317s] Invoked command in '/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/src/robot_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description
+[2.318s] Invoking command in '/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description -- -j8 -l8
+[2.366s] Invoked command in '/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description -- -j8 -l8
+[2.377s] Invoking command in '/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description
+[2.386s] -- Install configuration: ""
+[2.387s] -- Execute custom install script
+[2.387s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/urdf/rr_position_control.urdf
+[2.398s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/sdf/building_robot.sdf
+[2.408s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/launch/display.launch.py
+[2.419s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/config/bridge_config.yaml
+[2.429s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/package.xml
+[2.441s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/lib/robot_description/joint_angle_plotter.py
+[2.453s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/ament_index/resource_index/package_run_dependencies/robot_description
+[2.463s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/ament_index/resource_index/parent_prefix_path/robot_description
+[2.473s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/environment/ament_prefix_path.sh
+[2.483s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/environment/ament_prefix_path.dsv
+[2.494s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/environment/path.sh
+[2.505s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/environment/path.dsv
+[2.516s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/local_setup.bash
+[2.526s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/local_setup.sh
+[2.536s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/local_setup.zsh
+[2.547s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/local_setup.dsv
+[2.557s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/package.dsv
+[2.568s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/ament_index/resource_index/packages/robot_description
+[2.578s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/cmake/robot_descriptionConfig.cmake
+[2.588s] -- Symlinking: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/cmake/robot_descriptionConfig-version.cmake
+[2.598s] -- Up-to-date symlink: /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/install/robot_description/share/robot_description/package.xml
+[2.600s] Invoked command in '/home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/tingyi/git/GraduateProject/Rviz_AngleDisplay_test/build/robot_description
