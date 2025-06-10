@@ -1,0 +1,5 @@
+{
+    "STM32VSCodeExtension.productFinder.executablePath": "C:\\Users\\tingy\\AppData\\Local\\Programs\\STMCUFinder",
+    "STM32VSCodeExtension.projectCreator.executablePath": "C:\\Users\\tingy\\AppData\\Local\\Programs\\STM32CubeMX",
+    "STM32VSCodeExtension.cubeCLT.path": "C:\\ST\\STM32CubeCLT_1.18.0"
+}
